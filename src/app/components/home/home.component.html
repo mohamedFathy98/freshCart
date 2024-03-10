@@ -1,0 +1,82 @@
+<!-- Main slider -->
+<section>
+  <div class="row g-0">
+    <div class="col-md-10">
+
+      <owl-carousel-o [options]="Mainslider">
+        <ng-template carouselSlide><img
+          height="400px" src="./assets/images/main-slider-1.jpeg" class="w-100" alt="">
+        </ng-template>
+        <ng-template carouselSlide><img
+          height="400px" src="./assets/images/main-slider-2.jpeg" class="w-100" alt="">
+        </ng-template>
+        <ng-template carouselSlide><img
+          height="400px" src="./assets/images/main-slider-3.jpeg" class="w-100" alt="">
+        </ng-template>
+      </owl-carousel-o>
+
+
+
+    </div>
+    <div class="col-md-2">
+      <img height="200px"  src="../../../assets/images/slide-1.jpeg" class="w-100" alt="">
+      <img height="200px" src="../../../assets/images/slide-2.jpeg" class="w-100" alt="">
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- CATEGORIES -->
+<section class="my-3 ">
+
+  <owl-carousel-o [options]="CategoriesSliderOption">
+
+    <ng-container *ngFor="let item of Categories">
+      <ng-template carouselSlide >
+        <div>
+          <img class [src]="item.image" class="w-100" height="270px" alt="item.name">
+          <h3 class="h6">{{item.name}}</h3>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+
+</section>
+
+
+
+
+
+<!-- products -->
+<section class="my-4" >
+<h2>pooular products</h2>
+
+<input type="search" class="form-control w-50 mx-auto my-3" placeholder="search...."
+[(ngModel)]="searchTerm"
+
+>
+<div class="row g-4">
+
+  <div class="col-md-2" *ngFor="let item of products.slice(0,12) | search: searchTerm ">
+    <div class="product " >
+      <div class="p-2 cursor-pointer" [routerLink]="['/deatails' , item._id]">
+        <img [src]="item.imageCover" class="w-100" [alt]="item.title">
+      <h3 class="h6">{{item.category.name}}</h3>
+      <h4 class="h6">{{item.title.split(' ').slice(0,2).join("")  }}</h4>
+      <div class="d-flex align-center justify-content-between">
+        <span>{{item.price}} EGB</span>
+        <div><i class="fas fa-star rating-color"></i>
+        <span class="text-muted">{{item.ratingsAverage}}</span>
+        </div>
+      </div>
+      </div>
+      <button (click)="addCart(item._id)" class="btn-main w-100">Add To Cart</button>
+    </div>
+  </div>
+
+</div>
+
+</section>
